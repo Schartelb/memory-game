@@ -75,24 +75,14 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 
 function handleCardClick(event) {
-  
-  guess(event)
-  }
-
-function guess(event){
-  if(i<2){
-  event.target.style.backgroundColor=event.target.className
-  event.target.id="guess "+i
-  cards[i]=event.target.className
-  i++;
-  return;}
-  else if(cards[0] == cards[1] &&){
+  if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
+    && guess2.getAttribute('id')!="flipped"){
     console.log("The Guess function ran");
     console.log(cards[0],cards[1])
       const guess1 = document.getElementById("guess 0")
-         guess1.setAttribute("id","")
+         guess1.setAttribute("id","flipped")
       const guess2 = document.getElementById("guess 1")
-         guess2.setAttribute("id","")
+         guess2.setAttribute("id","flipped")
       i=0;
       cards.length="";
       return;
@@ -109,7 +99,12 @@ function guess(event){
       cards.length="";
       },1000)
       return
-    }
+    }else if(i<2){
+      event.target.style.backgroundColor=event.target.className
+      event.target.id="guess "+i
+      cards[i]=event.target.className
+      i++;
+      return;}
 }
 
   //using Start Game button using Slider value
