@@ -75,36 +75,37 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 
 function handleCardClick(event) {
-  if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
-    && guess2.getAttribute('id')!="flipped"){
+  if(i<2 && event.target.id!="flipped"){
+    event.target.style.backgroundColor=event.target.className
+    event.target.id="flipped"
+        //cards[i]=event.target.className
+    i++;
+    return;
+  }else if(i==2 && event.target.className!="flipped"){//if match
+  //if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
+  //  && guess2.getAttribute('id')!="flipped"){
     console.log("The Guess function ran");
-    console.log(cards[0],cards[1])
-      const guess1 = document.getElementById("guess 0")
-         guess1.setAttribute("id","flipped")
-      const guess2 = document.getElementById("guess 1")
-         guess2.setAttribute("id","flipped")
+    //console.log(cards[0],cards[1])
+      // const guess1 = document.getElementById("guess 0")
+         guess1.setAttribute("id","match")
+      // const guess2 = document.getElementById("guess 1")
+         guess2.setAttribute("id","match")
       i=0;
       cards.length="";
       return;
-  }else if(i==2){
+  }else if(i==2 && event.target.className!=guess1.className){
       setTimeout(function(){
-        const guess1 = document.getElementById("guess 0")
          guess1.setAttribute("style","")
          guess1.setAttribute("id","")
-        const guess2 = document.getElementById("guess 1")
-         guess2.setAttribute("style","")
-         guess2.setAttribute("id","")
-        console.log(guess1,guess2)
+         event.target.setAttribute("style","")
+         event.target.setAttribute("id","")
+        console.log(guess1,event.target.className)
         i=0;
       cards.length="";
       },1000)
       return
-    }else if(i<2){
-      event.target.style.backgroundColor=event.target.className
-      event.target.id="guess "+i
-      cards[i]=event.target.className
-      i++;
-      return;}
+    }
+    let guess1=event.target
 }
 
   //using Start Game button using Slider value
