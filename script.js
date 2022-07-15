@@ -4,7 +4,7 @@ const COLORS = [];
 const cards = [];
 cards.length=0;
 let i=0;
-
+let guess=""
 //sets array size based on slider value
 //generate random colors
 function randomcolors(){
@@ -75,37 +75,76 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 
 function handleCardClick(event) {
-  if(i<2 && event.target.id!="flipped"){
+   flipcard(event)
+   if(i==1){
+    guess=event.target
+    guess.setAttribute("id",'flipped')
+   }
+  if(i==2){
+  checkmatch(guess,event)
+  }
+}
+//   if(i<2 && event.target.id!="flipped"){
+//     event.target.style.backgroundColor=event.target.className
+//     event.target.id="flipped"
+//         //cards[i]=event.target.className
+//     i++;
+//     return;
+//   }else if(i==2 && event.target.className!="flipped"){//if match
+//   //if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
+//   //  && guess2.getAttribute('id')!="flipped"){
+//     console.log("The Guess function ran");
+//     //console.log(cards[0],cards[1])
+//       // const guess1 = document.getElementById("guess 0")
+//          guess1.setAttribute("id","match")
+//       // const guess2 = document.getElementById("guess 1")
+//          guess2.setAttribute("id","match")
+//       i=0;
+//       cards.length="";
+//       return;
+//   }else if(i==2 && event.target.className!=guess1.className){
+//       setTimeout(function(){
+//          guess1.setAttribute("style","")
+//          guess1.setAttribute("id","")
+//          event.target.setAttribute("style","")
+//          event.target.setAttribute("id","")
+//         console.log(guess1,event.target.className)
+//         i=0;
+//       cards.length="";
+//       },1000)
+//       return
+//     }
+//     let guess1=event.target
+// }
+function flipcard(event){
+  if(i<=2 && event.target.style.backgroundcolor!=event.target.className){
     event.target.style.backgroundColor=event.target.className
-    event.target.id="flipped"
-        //cards[i]=event.target.className
-    i++;
+  i++;
+  }
+  else return;
+}
+
+function checkmatch(guess,event){
+  if(event.target.getAttribute("id")!="flipped" && guess.className==event.target.className){
+    console.log("match!")
+    i=0
     return;
-  }else if(i==2 && event.target.className!="flipped"){//if match
-  //if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
-  //  && guess2.getAttribute('id')!="flipped"){
-    console.log("The Guess function ran");
-    //console.log(cards[0],cards[1])
-      // const guess1 = document.getElementById("guess 0")
-         guess1.setAttribute("id","match")
-      // const guess2 = document.getElementById("guess 1")
-         guess2.setAttribute("id","match")
-      i=0;
-      cards.length="";
-      return;
-  }else if(i==2 && event.target.className!=guess1.className){
-      setTimeout(function(){
-         guess1.setAttribute("style","")
-         guess1.setAttribute("id","")
-         event.target.setAttribute("style","")
-         event.target.setAttribute("id","")
-        console.log(guess1,event.target.className)
-        i=0;
-      cards.length="";
-      },1000)
-      return
-    }
-    let guess1=event.target
+  }else{
+    setTimeout(clearcard(guess,event),1000)
+    return;
+  }
+//if id = flipped and className == className
+//reset guesser
+//else id="" and backgroundColor == ""
+}
+
+function clearcard(guess,event){
+  guess.style.backgroundColor=""
+  guess.setAttribute('id',"")
+  event.target.style.backgroundColor=""
+  event.target.setAttribute("id","")
+  i=0;
+  guess=""
 }
 
   //using Start Game button using Slider value
