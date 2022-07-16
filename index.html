@@ -8,8 +8,11 @@
   <body>
     <h1>Memory Game!</h1>
     <form id="gameinput">
-      <input class= "form" id="slider" type="range" min="4" step="2" max="50" value=10>
-      <input type="submit" value="Start Game" name="start">
+      <div class="range-wrap">
+        <input type="range" id="slider" class="range" min="4" max="50" step="2">
+        <output class="bubble"></output>
+      </div>     
+      <input class="go-button" type="submit" value="Start Game" name="start">
     </form>
     <div id="game">
     </div>

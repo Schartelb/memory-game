@@ -5,6 +5,7 @@ const cards = [];
 cards.length=0;
 let i=0;
 let guess=""
+let score=0;
 //sets array size based on slider value
 //generate random colors
 function randomcolors(){
@@ -75,48 +76,17 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 
 function handleCardClick(event) {
-<<<<<<< HEAD
    flipcard(event)
    if(i==1){
     guess=event.target
     guess.setAttribute("id",'flipped')
    }
   if(i==2){
+    flipcard(event)
   checkmatch(guess,event)
   }
 }
-//   if(i<2 && event.target.id!="flipped"){
-//     event.target.style.backgroundColor=event.target.className
-//     event.target.id="flipped"
-//         //cards[i]=event.target.className
-//     i++;
-//     return;
-//   }else if(i==2 && event.target.className!="flipped"){//if match
-//   //if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
-//   //  && guess2.getAttribute('id')!="flipped"){
-//     console.log("The Guess function ran");
-//     //console.log(cards[0],cards[1])
-//       // const guess1 = document.getElementById("guess 0")
-//          guess1.setAttribute("id","match")
-//       // const guess2 = document.getElementById("guess 1")
-//          guess2.setAttribute("id","match")
-//       i=0;
-//       cards.length="";
-//       return;
-//   }else if(i==2 && event.target.className!=guess1.className){
-//       setTimeout(function(){
-//          guess1.setAttribute("style","")
-//          guess1.setAttribute("id","")
-//          event.target.setAttribute("style","")
-//          event.target.setAttribute("id","")
-//         console.log(guess1,event.target.className)
-//         i=0;
-//       cards.length="";
-//       },1000)
-//       return
-//     }
-//     let guess1=event.target
-// }
+
 function flipcard(event){
   if(i<=2 && event.target.style.backgroundcolor!=event.target.className){
     event.target.style.backgroundColor=event.target.className
@@ -127,7 +97,7 @@ function flipcard(event){
 
 function checkmatch(guess,event){
   if(event.target.getAttribute("id")!="flipped" && guess.className==event.target.className){
-    console.log("match!")
+    
     i=0
     return;
   }else{
@@ -140,78 +110,13 @@ function checkmatch(guess,event){
 }
 
 function clearcard(guess,event){
-  guess.style.backgroundColor=""
+  setTimeout(function(){guess.style.backgroundColor=""
   guess.setAttribute('id',"")
   event.target.style.backgroundColor=""
   event.target.setAttribute("id","")
   i=0;
   guess=""
-=======
-  if(i<=1 && event.target.getAttribute('id')!="flipped"){
-    flipcard(event)
-  }else{
-    guesscheck(guess,event)
-  }
-  // if(i<2 && event.target.id!="flipped"){
-  //   event.target.style.backgroundColor=event.target.className
-  //   event.target.id="flipped"
-  //       //cards[i]=event.target.className
-  //   i++;
-  //   return;
-  // }else if(i==2 && event.target.className!="flipped"){//if match
-  // //if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
-  // //  && guess2.getAttribute('id')!="flipped"){
-  //   console.log("The Guess function ran");
-  //   //console.log(cards[0],cards[1])
-  //     // const guess1 = document.getElementById("guess 0")
-  //        guess1.setAttribute("id","match")
-  //     // const guess2 = document.getElementById("guess 1")
-  //        guess2.setAttribute("id","match")
-  //     i=0;
-  //     cards.length="";
-  //     return;
-  // }else if(i==2 && event.target.className!=guess1.className){
-  //     setTimeout(function(){
-  //        guess1.setAttribute("style","")
-  //        guess1.setAttribute("id","")
-  //        event.target.setAttribute("style","")
-  //        event.target.setAttribute("id","")
-  //       console.log(guess1,event.target.className)
-  //       i=0;
-  //     cards.length="";
-  //     },1000)
-  //     return
-  //   }
-  //   let guess1=event.target
-}
-
-function flipcard(event){
-  event.target.style.backgroundColor = event.target.className
-  event.target.setAttribute('id','flipped')
-  i++;
-  if(i=0){
-    const guess = event.target
-  }
-  return guess;
-}
-
-function guesscheck(guess,event){
-  if(guess.className==event.target.className && guess.getAttribute("id")=='flipped'
-  && event.target.getAttribute('id')=='flipped'){
-    guess=""
-    i=0;
-    return;
-  }else{
-    setTimeout(function(){
-      guess.style.backgroundColor=""
-      guess.style.setAttribute('id','')
-      event.target.backgroundColor=""
-      event.target.setAttribute('id','')
-      return;
-  },1000)
-}
->>>>>>> 567f020153ec1a6f62139b867853bb9bfbcdf058
-}
+},1000)}
 
   //using Start Game button using Slider value
 const startGame=document.querySelector('#gameinput')
@@ -226,5 +131,26 @@ function GameStart(g){
   createDivsForColors(shuffledColors);
   }
 
-// when the DOM loads
-//createDivsForColors(shuffledColors)
+
+  //From https://css-tricks.com/value-bubbles-for-range-inputs/
+  const allRanges = document.querySelectorAll(".range-wrap");
+  allRanges.forEach(wrap => {
+    const range = wrap.querySelector(".range");
+    const bubble = wrap.querySelector(".bubble");
+  
+    range.addEventListener("input", () => {
+      setBubble(range, bubble);
+    });
+    setBubble(range, bubble);
+  });
+  
+  function setBubble(range, bubble) {
+    const val = range.value;
+    const min = range.min ? range.min : 0;
+    const max = range.max ? range.max : 100;
+    const newVal = Number(((val - min) * 100) / (max - min));
+    bubble.innerHTML = val;
+  
+    // Sorta magic numbers based on size of the native UI thumb
+    bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+  }
