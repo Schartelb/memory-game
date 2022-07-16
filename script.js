@@ -75,6 +75,7 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 
 function handleCardClick(event) {
+<<<<<<< HEAD
    flipcard(event)
    if(i==1){
     guess=event.target
@@ -145,6 +146,71 @@ function clearcard(guess,event){
   event.target.setAttribute("id","")
   i=0;
   guess=""
+=======
+  if(i<=1 && event.target.getAttribute('id')!="flipped"){
+    flipcard(event)
+  }else{
+    guesscheck(guess,event)
+  }
+  // if(i<2 && event.target.id!="flipped"){
+  //   event.target.style.backgroundColor=event.target.className
+  //   event.target.id="flipped"
+  //       //cards[i]=event.target.className
+  //   i++;
+  //   return;
+  // }else if(i==2 && event.target.className!="flipped"){//if match
+  // //if(cards[0] == cards[1] && guess1.getAttribute("id")!="flipped"
+  // //  && guess2.getAttribute('id')!="flipped"){
+  //   console.log("The Guess function ran");
+  //   //console.log(cards[0],cards[1])
+  //     // const guess1 = document.getElementById("guess 0")
+  //        guess1.setAttribute("id","match")
+  //     // const guess2 = document.getElementById("guess 1")
+  //        guess2.setAttribute("id","match")
+  //     i=0;
+  //     cards.length="";
+  //     return;
+  // }else if(i==2 && event.target.className!=guess1.className){
+  //     setTimeout(function(){
+  //        guess1.setAttribute("style","")
+  //        guess1.setAttribute("id","")
+  //        event.target.setAttribute("style","")
+  //        event.target.setAttribute("id","")
+  //       console.log(guess1,event.target.className)
+  //       i=0;
+  //     cards.length="";
+  //     },1000)
+  //     return
+  //   }
+  //   let guess1=event.target
+}
+
+function flipcard(event){
+  event.target.style.backgroundColor = event.target.className
+  event.target.setAttribute('id','flipped')
+  i++;
+  if(i=0){
+    const guess = event.target
+  }
+  return guess;
+}
+
+function guesscheck(guess,event){
+  if(guess.className==event.target.className && guess.getAttribute("id")=='flipped'
+  && event.target.getAttribute('id')=='flipped'){
+    guess=""
+    i=0;
+    return;
+  }else{
+    setTimeout(function(){
+      guess.style.backgroundColor=""
+      guess.style.setAttribute('id','')
+      event.target.backgroundColor=""
+      event.target.setAttribute('id','')
+      return;
+  },1000)
+}
+>>>>>>> 567f020153ec1a6f62139b867853bb9bfbcdf058
 }
 
   //using Start Game button using Slider value
